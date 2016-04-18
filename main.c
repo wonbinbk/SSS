@@ -94,26 +94,6 @@ void __interrupt myisr(void)
 			if (l==4) l=0;	
 			if(display_scan!=0) display_scan-=1;
 		}
-		if(TMR1IE && TMR1IF)
-		{
-			TMR1IF=0;
-			RC7= ~RC7;
-			second++;
-			if(second==60)
-			{
-				second=0;
-				minute++;
-				if(minute==60)
-				{
-					minute=0;
-					hour++;
-					if(hour==24) hour=0;
-				}
-			}
-			TMR1H=0x80;
-			TMR1L=0x00;
-			print7(hour*100+minute);			
-		}
 	}
 		
 void main (void)
@@ -122,12 +102,11 @@ void main (void)
 		pwm_update(0);
 		TRISC7=0;
 		TRISC6=0;
-		hour=3;
-		minute=1;
-		second=0;
 		while(1)
 		{
-		;
+			T=read_adc(temp_in);
+			print7(T);
+			__delay_ms(500);
 		}		
 	}
 
@@ -182,8 +161,8 @@ void init(void)
 		TMR1CS = 1;		//Use external clock
 		T1SYNC = 1;		//Do not syncronize with internal clock, to use in Sleep mode
 		TMR1H=0x80;		
-		TMR1ON = 1;		//Enable Timer 1
-		TMR1IE = 1;		//enable Timer 1 interrupt
+		TMR1ON = 0;		//Enable Timer 1
+		TMR1IE = 0;		//enable Timer 1 interrupt
 	//Interrupt
 		GIE=1;
 		PEIE=1;
