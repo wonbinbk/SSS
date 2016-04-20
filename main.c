@@ -43,9 +43,9 @@ float Temp;
 unsigned int v,duty;
 unsigned int tar,pre_tar,T,pre_T;
 div_t result;
-unsigned char d[4],led[4],l,i,display_scan;	
+unsigned char d[4],led[4],l,i;	
 unsigned char hour, minute, second;
-unsigned char led7[14]=	{
+unsigned char led7[15]=	{
 				0b10000000,	//0
 				0b10011110,	//1
 				0b100100,	//2
@@ -60,20 +60,24 @@ unsigned char led7[14]=	{
 				0b1100000,	//E
 				0b10010,	//H
 				0b111000,	//deg
-
+				0b1101110,      //equal
 			};
 #define E 11
 #define H 12
 #define dash 10
 #define S 5
 #define deg 13
+#define equal 14
 #define temp_adj 4
 #define temp_in 3
+#define tar_changed 1
+#define tar_unchanged 0
 unsigned char sen_err,heat_err;
+unsigned char display_scan;
 void init();
 void putch(char c);
 void pwm_update(unsigned int duty_cycle);
-void print7(unsigned int num);
+void print7(unsigned int num, unsigned char display);
 unsigned int read_adc(unsigned char channel);
 //Interrupt service routine			
 void __interrupt myisr(void)
@@ -109,27 +113,32 @@ void main (void)
 		PORTB=0xFF;
 		RC5=0;
 		PORTA=0x10;
+		TRISCbits.TRISC7=1;
+		TRISCbits.TRISC6=1;
 		while(1)
 		{
-			for(i=0;i++;i<8)
+			for(i=0;i<8;i++)
 			{
 				tar=tar+read_adc(temp_adj);
 			}
-			tar=30+(tar>>3);
+			tar=150+(tar>>7)*5;
 			if (tar!=pre_tar)	//Only display if changed
 			{	
-				display_scan=100;
+				display_scan=200;
 				pre_tar=tar;
 			}			
-			T=read_adc(temp_in);
-			T=((T-187)*100)>>6;//Convert T to degree Celsius
-			if(display_scan!=0) print7(tar);
-			else print7(T);
+			for(i=0;i<8;i++)
+			{
+				T=T+read_adc(temp_in);
+			}
+			T=(((T>>3)-187)*100)>>6;//Convert T to degree Celsius
+			if(display_scan!=0) print7(tar,tar_changed);
+			else print7(T, tar_unchanged);
 			if(tar>T) pwm_update(1023);
 			else pwm_update(0);
+			__delay_ms(100);
 			tar=0;
 			T=0;
-			__delay_ms(200);
 		}		
 	}
 
@@ -221,17 +230,30 @@ void pwm_update(unsigned int duty_cycle)
 	This function return the hundredth, the tenth and unit of
 	required number to display.
 	0 <= num <= 999.
-	The real LED scanning will happen in ISR (every 8mS).
+	The real LED scanning will happen in ISR (every 6mS).
 ***************************************************************************************************************************/
-void print7(unsigned int num)
+void print7(unsigned int num,unsigned char display)
 	{
-		result=div(num,100);
-		d[3]=result.quot;
-		num=result.rem;
-		result=div(num,10);
-		d[2]=result.quot;
-		d[1]=result.rem;
-		d[0]=deg;	
+		if(display==tar_unchanged)
+		{
+			result=div(num,100);
+			d[3]=result.quot;
+			num=result.rem;
+			result=div(num,10);
+			d[2]=result.quot;
+			d[1]=result.rem;
+			d[0]=deg;
+		}
+		else
+		{
+			result=div(num,100);
+			d[2]=result.quot;
+			num=result.rem;
+			result=div(num,10);
+			d[1]=result.quot;
+			d[0]=result.rem;
+			d[3]=equal;
+		}
 	}
 
 
@@ -241,11 +263,12 @@ void print7(unsigned int num)
 ***************************************************************************************************************************/
 unsigned int read_adc(unsigned char channel)
 	{
-		v=0;
+		GIE=0;
 		ADCON0bits.CHS = channel;
 		__delay_us(30);
 		GO_DONE=1;
 		while(GO_DONE) continue;
 		v=(ADRESH<<8) + ADRESL;
+		GIE=1;
 		return v;
 	}
