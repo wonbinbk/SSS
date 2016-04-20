@@ -25,7 +25,9 @@
 	RA4 - DP
 	RB0 - Interrupt on change for Holster detection
 	
-		     a
+The semicolon ":" only display when RA2=1 & RA4=0
+	
+		  a
 	    	---
 	       f|g |b
 	    	----
@@ -37,12 +39,13 @@
 #pragma config LVP=OFF, CPD=OFF, WRT=OFF, FOSC=HS
 
 // Variable declare
+float Temp;
 unsigned int v,duty;
 unsigned int tar,pre_tar,T,pre_T;
 div_t result;
 unsigned char d[4],led[4],l,i,display_scan;	
 unsigned char hour, minute, second;
-unsigned char led7[13]=	{
+unsigned char led7[14]=	{
 				0b10000000,	//0
 				0b10011110,	//1
 				0b100100,	//2
@@ -56,11 +59,14 @@ unsigned char led7[13]=	{
 				0b1111110,	//-
 				0b1100000,	//E
 				0b10010,	//H
+				0b111000,	//deg
+
 			};
 #define E 11
 #define H 12
 #define dash 10
 #define S 5
+#define deg 13
 #define temp_adj 4
 #define temp_in 3
 unsigned char sen_err,heat_err;
@@ -76,19 +82,19 @@ void __interrupt myisr(void)
 		if(TMR0IE && TMR0IF)
 		{
 			TMR0IF=0;
-			PORTA=0;
-			/*if (l==2 && d[l]==0 && d[l+1]==0) l=0;	//If digit 2 is zero, skip.
-			if (l==3 && d[l]==0) l=0;*/
-			PORTB=led7[d[l]];// & ~(heating<<5);
+			PORTA=0x10;
+			PORTB=led7[d[l]];
 			if(l<3)
 			{
 				PORTA=1<<l;
+				__delay_us(10);
 				RC5=0;
 			}
 			else 
 			{
 				RC5=1;
-				PORTA=0;
+				__delay_us(10);
+				PORTA=0x10;
 			}	
 			l++;
 			if (l==4) l=0;	
@@ -100,13 +106,30 @@ void main (void)
 	{
 		init();
 		pwm_update(0);
-		TRISC7=0;
-		TRISC6=0;
+		PORTB=0xFF;
+		RC5=0;
+		PORTA=0x10;
 		while(1)
 		{
+			for(i=0;i++;i<8)
+			{
+				tar=tar+read_adc(temp_adj);
+			}
+			tar=30+(tar>>3);
+			if (tar!=pre_tar)	//Only display if changed
+			{	
+				display_scan=100;
+				pre_tar=tar;
+			}			
 			T=read_adc(temp_in);
-			print7(T);
-			__delay_ms(500);
+			T=((T-187)*100)>>6;//Convert T to degree Celsius
+			if(display_scan!=0) print7(tar);
+			else print7(T);
+			if(tar>T) pwm_update(1023);
+			else pwm_update(0);
+			tar=0;
+			T=0;
+			__delay_ms(200);
 		}		
 	}
 
@@ -138,7 +161,7 @@ void init(void)
 		ADCS2 = 1;
 		ADCON0bits.CHS = 3;			//Default AN3
 		ADON = 1;
-		ADFM = 0;					//Left justified. 6 lsb of ADRESL=0
+		ADFM = 1;					//Right justified
 		ADCON1bits.PCFG = 0;		
 			
 	//PWM
@@ -202,15 +225,13 @@ void pwm_update(unsigned int duty_cycle)
 ***************************************************************************************************************************/
 void print7(unsigned int num)
 	{
-		result=div(num,1000);
+		result=div(num,100);
 		d[3]=result.quot;
 		num=result.rem;
-		result=div(num,100);
-		d[2]=result.quot;
-		num=result.rem;
 		result=div(num,10);
-		d[1]=result.quot;
-		d[0]=result.rem;
+		d[2]=result.quot;
+		d[1]=result.rem;
+		d[0]=deg;	
 	}
 
 
@@ -220,9 +241,11 @@ void print7(unsigned int num)
 ***************************************************************************************************************************/
 unsigned int read_adc(unsigned char channel)
 	{
+		v=0;
 		ADCON0bits.CHS = channel;
+		__delay_us(30);
 		GO_DONE=1;
 		while(GO_DONE) continue;
-		v=(ADRESH<<2) +	(ADRESL>>6);
+		v=(ADRESH<<8) + ADRESL;
 		return v;
 	}
