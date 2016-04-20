@@ -1,0 +1,12 @@
+Tram han requirements:
+
+-Adjust temperature using analog variable resistor.
+-Display using 4x7segments LED. (required 12 output to control).
+-Auto standby when iron rests on the case. (Lower temperature to 200°C). (required 1 input capture).
+-Auto power off when resting for a long time (15 minutes). (required Timer interrupt).
+Additional:
+-Use PID control to adjust the iron tip temperature.
+-While standing by, display current time (using RTC chip) / current ambient temp
+(require I2C wires).
+
+

@@ -1,0 +1,1151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="D">
+  <design>
+    <source>/media/wonbinbk/DATA/DATA on HP/WORKING/Soldering station/My station/PIC soldering station.sch</source>
+    <date>Fri 08 Apr 2016 01:08:42 PM ICT</date>
+    <tool>Eeschema 4.0.2-4+6225~38~ubuntu14.04.1-stable</tool>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title>Hakko 907 PIC based controller</title>
+        <company>Thai Phan</company>
+        <rev>1</rev>
+        <date>17 dec 2015</date>
+        <source>PIC soldering station.sch</source>
+        <comment number="1" value=""/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="U5">
+      <value>PIC16F876A</value>
+      <footprint>Housings_DIP:DIP-28_W7.62mm_LongPads</footprint>
+      <libsource lib="PIC soldering station-cache" part="PIC16F873"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>564C5244</tstamp>
+    </comp>
+    <comp ref="U1">
+      <value>LM358</value>
+      <footprint>SMD_Packages:SOIC-8-N</footprint>
+      <libsource lib="PIC soldering station-rescue" part="LM358-RESCUE-PIC_soldering_station"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>564F4D22</tstamp>
+    </comp>
+    <comp ref="R8">
+      <value>10K</value>
+      <footprint>Discret:R3</footprint>
+      <libsource lib="PIC soldering station-rescue" part="R-RESCUE-PIC_soldering_station"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>564F4FA9</tstamp>
+    </comp>
+    <comp ref="R6">
+      <value>1K</value>
+      <footprint>Discret:R3</footprint>
+      <libsource lib="PIC soldering station-rescue" part="R-RESCUE-PIC_soldering_station"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>564F502F</tstamp>
+    </comp>
+    <comp ref="R2">
+      <value>10K</value>
+      <footprint>Discret:R3</footprint>
+      <libsource lib="PIC soldering station-rescue" part="R-RESCUE-PIC_soldering_station"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>564F68ED</tstamp>
+    </comp>
+    <comp ref="R1">
+      <value>1.5K</value>
+      <footprint>Discret:R3</footprint>
+      <libsource lib="PIC soldering station-rescue" part="R-RESCUE-PIC_soldering_station"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>564F6901</tstamp>
+    </comp>
+    <comp ref="C1">
+      <value>104</value>
+      <footprint>w_capacitors:cnp_3mm_disc</footprint>
+      <libsource lib="PIC soldering station-rescue" part="C-RESCUE-PIC_soldering_station"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>564F6910</tstamp>
+    </comp>
+    <comp ref="R4">
+      <value>10K</value>
+      <footprint>Discret:R3</footprint>
+      <libsource lib="PIC soldering station-rescue" part="R-RESCUE-PIC_soldering_station"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>564F7538</tstamp>
+    </comp>
+    <comp ref="R3">
+      <value>1K</value>
+      <footprint>Discret:R3</footprint>
+      <libsource lib="PIC soldering station-rescue" part="R-RESCUE-PIC_soldering_station"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>564F7547</tstamp>
+    </comp>
+    <comp ref="RV1">
+      <value>10K</value>
+      <footprint>Buttons_Switches_SMD:SW_SPST_B3S-1100</footprint>
+      <libsource lib="device" part="POT"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>564F7556</tstamp>
+    </comp>
+    <comp ref="C3">
+      <value>104</value>
+      <footprint>w_capacitors:cnp_3mm_disc</footprint>
+      <libsource lib="PIC soldering station-rescue" part="C-RESCUE-PIC_soldering_station"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>564F756D</tstamp>
+    </comp>
+    <comp ref="K2">
+      <value>hakko 907</value>
+      <footprint>w_conn_screw:mors_5p</footprint>
+      <libsource lib="conn" part="XLR5"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>564FCB74</tstamp>
+    </comp>
+    <comp ref="U4">
+      <value>TMP101</value>
+      <footprint>TO_SOT_Packages_SMD:SOT-23-6</footprint>
+      <libsource lib="PIC soldering station-cache" part="TMP101"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>564FE801</tstamp>
+    </comp>
+    <comp ref="C20">
+      <value>104</value>
+      <footprint>w_capacitors:cnp_3mm_disc</footprint>
+      <libsource lib="PIC soldering station-rescue" part="C-RESCUE-PIC_soldering_station"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>564FEB40</tstamp>
+    </comp>
+    <comp ref="R7">
+      <value>4.7K</value>
+      <footprint>Discret:R3</footprint>
+      <libsource lib="PIC soldering station-rescue" part="R-RESCUE-PIC_soldering_station"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>564FEE8C</tstamp>
+    </comp>
+    <comp ref="R11">
+      <value>4.7K</value>
+      <footprint>Discret:R3</footprint>
+      <libsource lib="PIC soldering station-rescue" part="R-RESCUE-PIC_soldering_station"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>564FEE98</tstamp>
+    </comp>
+    <comp ref="Q3">
+      <value>IRLR2908</value>
+      <footprint>SMD_Packages_by_Karl:DPAK-3_GDS</footprint>
+      <libsource lib="PIC soldering station-cache" part="MOS_N"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>564FFBC2</tstamp>
+    </comp>
+    <comp ref="C2">
+      <value>104</value>
+      <footprint>w_capacitors:cnp_3mm_disc</footprint>
+      <libsource lib="PIC soldering station-rescue" part="C-RESCUE-PIC_soldering_station"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>56500103</tstamp>
+    </comp>
+    <comp ref="C4">
+      <value>104</value>
+      <footprint>w_capacitors:cnp_3mm_disc</footprint>
+      <libsource lib="PIC soldering station-rescue" part="C-RESCUE-PIC_soldering_station"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>565017F8</tstamp>
+    </comp>
+    <comp ref="P1">
+      <value>24VAC</value>
+      <footprint>Terminal_Blocks:TerminalBlock_Pheonix_MKDS1.5-2pol</footprint>
+      <libsource lib="conn" part="CONN_2"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>56502E25</tstamp>
+    </comp>
+    <comp ref="D1">
+      <value>BRIDGE-6A</value>
+      <footprint>Terminal_blocks:Diode_bridge_KPBC60xx</footprint>
+      <libsource lib="PIC soldering station-cache" part="BRIDGE"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>56502E32</tstamp>
+    </comp>
+    <comp ref="R5">
+      <value>1.5K</value>
+      <footprint>Discret:R3</footprint>
+      <libsource lib="PIC soldering station-rescue" part="R-RESCUE-PIC_soldering_station"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>56503638</tstamp>
+    </comp>
+    <comp ref="D2">
+      <value>5V_ON</value>
+      <footprint>LEDs:LED-3MM</footprint>
+      <libsource lib="PIC soldering station-rescue" part="LED-RESCUE-PIC_soldering_station"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>56503644</tstamp>
+    </comp>
+    <comp ref="X1">
+      <value>32.768kHz</value>
+      <footprint>Crystals:Crystal_Round_Horizontal_3mm_BigPad</footprint>
+      <libsource lib="PIC soldering station-cache" part="CRYSTAL"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5650387D</tstamp>
+    </comp>
+    <comp ref="C11">
+      <value>22pF</value>
+      <footprint>w_capacitors:cnp_3mm_disc</footprint>
+      <libsource lib="PIC soldering station-rescue" part="C-RESCUE-PIC_soldering_station"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>56503B6C</tstamp>
+    </comp>
+    <comp ref="C13">
+      <value>22pF</value>
+      <footprint>w_capacitors:cnp_3mm_disc</footprint>
+      <libsource lib="PIC soldering station-rescue" part="C-RESCUE-PIC_soldering_station"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>56503C77</tstamp>
+    </comp>
+    <comp ref="J1">
+      <value>DC_INLET</value>
+      <footprint>w_conn_misc:dc_socket</footprint>
+      <libsource lib="PIC soldering station-cache" part="DC_INLET"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>56504573</tstamp>
+    </comp>
+    <comp ref="X2">
+      <value>20Mhz</value>
+      <footprint>Crystals:Crystal_HC50-U_Vertical</footprint>
+      <libsource lib="PIC soldering station-cache" part="CRYSTAL"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>565052E1</tstamp>
+    </comp>
+    <comp ref="C15">
+      <value>22pF</value>
+      <footprint>w_capacitors:cnp_3mm_disc</footprint>
+      <libsource lib="PIC soldering station-rescue" part="C-RESCUE-PIC_soldering_station"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>565052E7</tstamp>
+    </comp>
+    <comp ref="C16">
+      <value>22pF</value>
+      <footprint>w_capacitors:cnp_3mm_disc</footprint>
+      <libsource lib="PIC soldering station-rescue" part="C-RESCUE-PIC_soldering_station"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>565052ED</tstamp>
+    </comp>
+    <comp ref="SW2">
+      <value>BUTTON1</value>
+      <footprint>Buttons_Switches_ThroughHole:SW_PUSH_SMALL</footprint>
+      <libsource lib="device" part="SPST"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>56507057</tstamp>
+    </comp>
+    <comp ref="SW3">
+      <value>BUTTON2</value>
+      <footprint>Buttons_Switches_ThroughHole:SW_PUSH_SMALL</footprint>
+      <libsource lib="device" part="SPST"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5650705D</tstamp>
+    </comp>
+    <comp ref="RV2">
+      <value>10K</value>
+      <footprint>Buttons_Switches_SMD:SW_SPST_B3S-1100</footprint>
+      <libsource lib="device" part="POT"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>564F7A74</tstamp>
+    </comp>
+    <comp ref="R23">
+      <value>1.5K</value>
+      <footprint>Discret:R3</footprint>
+      <libsource lib="PIC soldering station-rescue" part="R-RESCUE-PIC_soldering_station"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>565353C2</tstamp>
+    </comp>
+    <comp ref="R24">
+      <value>1.5K</value>
+      <footprint>Discret:R3</footprint>
+      <libsource lib="PIC soldering station-rescue" part="R-RESCUE-PIC_soldering_station"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>565353EE</tstamp>
+    </comp>
+    <comp ref="R25">
+      <value>10K</value>
+      <footprint>Discret:R3</footprint>
+      <libsource lib="PIC soldering station-rescue" part="R-RESCUE-PIC_soldering_station"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>565353F4</tstamp>
+    </comp>
+    <comp ref="R26">
+      <value>10K</value>
+      <footprint>Discret:R3</footprint>
+      <libsource lib="PIC soldering station-rescue" part="R-RESCUE-PIC_soldering_station"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>565353FA</tstamp>
+    </comp>
+    <comp ref="D4">
+      <value>LED1</value>
+      <footprint>LEDs:LED-3MM</footprint>
+      <libsource lib="PIC soldering station-rescue" part="LED-RESCUE-PIC_soldering_station"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>56535400</tstamp>
+    </comp>
+    <comp ref="D5">
+      <value>LED2</value>
+      <footprint>LEDs:LED-3MM</footprint>
+      <libsource lib="PIC soldering station-rescue" part="LED-RESCUE-PIC_soldering_station"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>56535406</tstamp>
+    </comp>
+    <comp ref="R13">
+      <value>1.5K</value>
+      <footprint>Discret:R3</footprint>
+      <libsource lib="PIC soldering station-rescue" part="R-RESCUE-PIC_soldering_station"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5658B22F</tstamp>
+    </comp>
+    <comp ref="R14">
+      <value>1.5K</value>
+      <footprint>Discret:R3</footprint>
+      <libsource lib="PIC soldering station-rescue" part="R-RESCUE-PIC_soldering_station"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5658B235</tstamp>
+    </comp>
+    <comp ref="R16">
+      <value>1.5K</value>
+      <footprint>Discret:R3</footprint>
+      <libsource lib="PIC soldering station-rescue" part="R-RESCUE-PIC_soldering_station"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5658B23B</tstamp>
+    </comp>
+    <comp ref="R17">
+      <value>1.5K</value>
+      <footprint>Discret:R3</footprint>
+      <libsource lib="PIC soldering station-rescue" part="R-RESCUE-PIC_soldering_station"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5658B241</tstamp>
+    </comp>
+    <comp ref="R18">
+      <value>1.5K</value>
+      <footprint>Discret:R3</footprint>
+      <libsource lib="PIC soldering station-rescue" part="R-RESCUE-PIC_soldering_station"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5658B247</tstamp>
+    </comp>
+    <comp ref="R19">
+      <value>1.5K</value>
+      <footprint>Discret:R3</footprint>
+      <libsource lib="PIC soldering station-rescue" part="R-RESCUE-PIC_soldering_station"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5658B24D</tstamp>
+    </comp>
+    <comp ref="R15">
+      <value>1.5K</value>
+      <footprint>Discret:R3</footprint>
+      <libsource lib="PIC soldering station-rescue" part="R-RESCUE-PIC_soldering_station"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5658B259</tstamp>
+    </comp>
+    <comp ref="Q1">
+      <value>C1815</value>
+      <footprint>TO_SOT_Packages_THT:TO-92_Molded_Wide_Oval</footprint>
+      <libsource lib="PIC soldering station-cache" part="NPN"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5658D168</tstamp>
+    </comp>
+    <comp ref="R9">
+      <value>560</value>
+      <footprint>Discret:R3</footprint>
+      <libsource lib="PIC soldering station-rescue" part="R-RESCUE-PIC_soldering_station"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5658D81A</tstamp>
+    </comp>
+    <comp ref="R12">
+      <value>22R</value>
+      <footprint>Discret:R3</footprint>
+      <libsource lib="PIC soldering station-rescue" part="R-RESCUE-PIC_soldering_station"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>565A841E</tstamp>
+    </comp>
+    <comp ref="Q2">
+      <value>A1015</value>
+      <footprint>TO_SOT_Packages_THT:TO-92_Molded_Wide_Oval</footprint>
+      <libsource lib="PIC soldering station-cache" part="PNP"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5672A693</tstamp>
+    </comp>
+    <comp ref="R10">
+      <value>2.7K</value>
+      <footprint>Discret:R3</footprint>
+      <libsource lib="PIC soldering station-rescue" part="R-RESCUE-PIC_soldering_station"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>56865469</tstamp>
+    </comp>
+    <comp ref="C8">
+      <value>104</value>
+      <footprint>w_capacitors:cnp_3mm_disc</footprint>
+      <libsource lib="PIC soldering station-rescue" part="C-RESCUE-PIC_soldering_station"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>568674DD</tstamp>
+    </comp>
+    <comp ref="C10">
+      <value>104</value>
+      <footprint>w_capacitors:cnp_3mm_disc</footprint>
+      <libsource lib="PIC soldering station-rescue" part="C-RESCUE-PIC_soldering_station"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>568680FE</tstamp>
+    </comp>
+    <comp ref="C17">
+      <value>104</value>
+      <footprint>w_capacitors:cnp_3mm_disc</footprint>
+      <libsource lib="PIC soldering station-rescue" part="C-RESCUE-PIC_soldering_station"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>564F64D7</tstamp>
+    </comp>
+    <comp ref="R22">
+      <value>560</value>
+      <footprint>Discret:R3</footprint>
+      <libsource lib="PIC soldering station-rescue" part="R-RESCUE-PIC_soldering_station"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>56F70147</tstamp>
+    </comp>
+    <comp ref="R21">
+      <value>560</value>
+      <footprint>Discret:R3</footprint>
+      <libsource lib="PIC soldering station-rescue" part="R-RESCUE-PIC_soldering_station"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>56F70645</tstamp>
+    </comp>
+    <comp ref="R27">
+      <value>100K</value>
+      <footprint>Discret:R3</footprint>
+      <libsource lib="PIC soldering station-rescue" part="R-RESCUE-PIC_soldering_station"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>56F72F4B</tstamp>
+    </comp>
+    <comp ref="C19">
+      <value>104</value>
+      <footprint>w_capacitors:cnp_3mm_disc</footprint>
+      <libsource lib="PIC soldering station-rescue" part="C-RESCUE-PIC_soldering_station"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>56F7BE8A</tstamp>
+    </comp>
+    <comp ref="C18">
+      <value>104</value>
+      <footprint>w_capacitors:cnp_3mm_disc</footprint>
+      <libsource lib="PIC soldering station-rescue" part="C-RESCUE-PIC_soldering_station"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>56F7BFAE</tstamp>
+    </comp>
+    <comp ref="D3">
+      <value>heat_en</value>
+      <footprint>LEDs:LED-3MM</footprint>
+      <libsource lib="PIC soldering station-rescue" part="LED-RESCUE-PIC_soldering_station"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>56F7EE3C</tstamp>
+    </comp>
+    <comp ref="U2">
+      <value>LM7812</value>
+      <footprint>TO_SOT_Packages_THT:TO-220_Neutral123_Vertical_LargePads</footprint>
+      <libsource lib="regul" part="LM7812"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5701EAF4</tstamp>
+    </comp>
+    <comp ref="U3">
+      <value>LM7805</value>
+      <footprint>TO_SOT_Packages_THT:TO-220_Neutral123_Vertical_LargePads</footprint>
+      <libsource lib="regul" part="LM7805"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5701EB95</tstamp>
+    </comp>
+    <comp ref="C5">
+      <value>100uF/ 25V</value>
+      <footprint>w_capacitors:CP_6.3x11mm</footprint>
+      <libsource lib="device" part="CP_Small"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5701ED29</tstamp>
+    </comp>
+    <comp ref="C7">
+      <value>0.1uF</value>
+      <footprint>w_capacitors:cnp_3mm_disc</footprint>
+      <libsource lib="device" part="C_Small"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5701EFBA</tstamp>
+    </comp>
+    <comp ref="C9">
+      <value>0.1uF</value>
+      <footprint>w_capacitors:cnp_3mm_disc</footprint>
+      <libsource lib="device" part="C_Small"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5701F105</tstamp>
+    </comp>
+    <comp ref="C12">
+      <value>0.1uF</value>
+      <footprint>w_capacitors:cnp_3mm_disc</footprint>
+      <libsource lib="device" part="C_Small"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5701F245</tstamp>
+    </comp>
+    <comp ref="C6">
+      <value>104</value>
+      <footprint>w_capacitors:cnp_3mm_disc</footprint>
+      <libsource lib="PIC soldering station-rescue" part="C-RESCUE-PIC_soldering_station"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5702462F</tstamp>
+    </comp>
+    <comp ref="R20">
+      <value>1.5K</value>
+      <footprint>Discret:R3</footprint>
+      <libsource lib="PIC soldering station-rescue" part="R-RESCUE-PIC_soldering_station"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>57028B5E</tstamp>
+    </comp>
+    <comp ref="AFF1">
+      <value>CA56-12</value>
+      <footprint>Displays_7-Segment:Cx56-12</footprint>
+      <libsource lib="display" part="CA56-12"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamp>5702EF58</tstamp>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="regul" part="7805">
+      <aliases>
+        <alias>LM7805</alias>
+        <alias>LM7812</alias>
+        <alias>78L05</alias>
+      </aliases>
+      <description>Linear Regulator +5V</description>
+      <docs>regulator\lm78xx.pdf</docs>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">7805</field>
+      </fields>
+      <pins>
+        <pin num="1" name="VI" type="input"/>
+        <pin num="2" name="GND" type="input"/>
+        <pin num="3" name="VO" type="power_out"/>
+      </pins>
+    </libpart>
+    <libpart lib="PIC soldering station-cache" part="BRIDGE">
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">BRIDGE</field>
+      </fields>
+      <pins>
+        <pin num="1" name="-" type="input"/>
+        <pin num="2" name="~" type="input"/>
+        <pin num="3" name="+" type="input"/>
+        <pin num="4" name="~" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="PIC soldering station-rescue" part="C-RESCUE-PIC_soldering_station">
+      <footprints>
+        <fp>SM*</fp>
+        <fp>C?</fp>
+        <fp>C1-1</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">C-RESCUE-PIC_soldering_station</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="display" part="CA56-12">
+      <description>Kingbright 4 x 7-segment common anode display</description>
+      <docs>http://www.kingbrightusa.com/images/catalog/SPEC/CA56-12EWA.pdf</docs>
+      <footprints>
+        <fp>Cx56-12</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">AFF</field>
+        <field name="Value">CA56-12</field>
+      </fields>
+      <pins>
+        <pin num="1" name="e" type="input"/>
+        <pin num="2" name="d" type="input"/>
+        <pin num="3" name="DP" type="input"/>
+        <pin num="4" name="c" type="input"/>
+        <pin num="5" name="g" type="input"/>
+        <pin num="6" name="CA4" type="input"/>
+        <pin num="7" name="b" type="input"/>
+        <pin num="8" name="CA3" type="input"/>
+        <pin num="9" name="CA2" type="input"/>
+        <pin num="10" name="f" type="input"/>
+        <pin num="11" name="a" type="input"/>
+        <pin num="12" name="CA1" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="conn" part="CONN_2">
+      <description>Symbole general de connecteur</description>
+      <fields>
+        <field name="Reference">P</field>
+        <field name="Value">CONN_2</field>
+      </fields>
+      <pins>
+        <pin num="1" name="P1" type="passive"/>
+        <pin num="2" name="PM" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="device" part="CP_Small">
+      <description>Polarised capacitor</description>
+      <footprints>
+        <fp>CP*</fp>
+        <fp>Elko*</fp>
+        <fp>TantalC*</fp>
+        <fp>C*elec</fp>
+        <fp>c_elec*</fp>
+        <fp>SMD*_Pol</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">CP_Small</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="PIC soldering station-cache" part="CRYSTAL">
+      <fields>
+        <field name="Reference">X</field>
+        <field name="Value">CRYSTAL</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="device" part="C_Small">
+      <description>Unpolarized capacitor</description>
+      <footprints>
+        <fp>C?</fp>
+        <fp>C_????_*</fp>
+        <fp>C_????</fp>
+        <fp>SMD*_c</fp>
+        <fp>Capacitor*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">C_Small</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="PIC soldering station-cache" part="DC_INLET">
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">DC_INLET</field>
+      </fields>
+      <pins>
+        <pin num="1" name="V+" type="input"/>
+        <pin num="2" name="GND" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="PIC soldering station-rescue" part="LED-RESCUE-PIC_soldering_station">
+      <footprints>
+        <fp>LED-3MM</fp>
+        <fp>LED-5MM</fp>
+        <fp>LED-10MM</fp>
+        <fp>LED-0603</fp>
+        <fp>LED-0805</fp>
+        <fp>LED-1206</fp>
+        <fp>LEDV</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">LED-RESCUE-PIC_soldering_station</field>
+      </fields>
+      <pins>
+        <pin num="1" name="A" type="passive"/>
+        <pin num="2" name="K" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="PIC soldering station-rescue" part="LM358-RESCUE-PIC_soldering_station">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">LM358-RESCUE-PIC_soldering_station</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="output"/>
+        <pin num="2" name="-" type="input"/>
+        <pin num="3" name="+" type="input"/>
+        <pin num="4" name="V-" type="power_in"/>
+        <pin num="5" name="+" type="input"/>
+        <pin num="6" name="-" type="input"/>
+        <pin num="7" name="~" type="output"/>
+        <pin num="8" name="V+" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="PIC soldering station-cache" part="MOS_N">
+      <aliases>
+        <alias>MOSFET_N</alias>
+      </aliases>
+      <fields>
+        <field name="Reference">Q</field>
+        <field name="Value">MOS_N</field>
+      </fields>
+      <pins>
+        <pin num="D" name="D" type="passive"/>
+        <pin num="G" name="G" type="input"/>
+        <pin num="S" name="S" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="PIC soldering station-cache" part="NPN">
+      <fields>
+        <field name="Reference">Q</field>
+        <field name="Value">NPN</field>
+      </fields>
+      <pins>
+        <pin num="1" name="E" type="passive"/>
+        <pin num="2" name="B" type="input"/>
+        <pin num="3" name="C" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="PIC soldering station-cache" part="PIC16F873">
+      <fields>
+        <field name="Reference">U***</field>
+        <field name="Value">PIC16F873</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~MCLR~/VPP" type="input"/>
+        <pin num="2" name="RA0" type="BiDi"/>
+        <pin num="3" name="RA1" type="BiDi"/>
+        <pin num="4" name="RA2" type="BiDi"/>
+        <pin num="5" name="RA3" type="BiDi"/>
+        <pin num="6" name="RA4/TOKI" type="BiDi"/>
+        <pin num="7" name="RA5" type="BiDi"/>
+        <pin num="8" name="VSS" type="power_in"/>
+        <pin num="9" name="OSC1/CLKI" type="input"/>
+        <pin num="10" name="OSC2/CLKO/RA6" type="output"/>
+        <pin num="11" name="RC0/T1OSO/T1KI" type="BiDi"/>
+        <pin num="12" name="RC1/T1OS/CCP2" type="BiDi"/>
+        <pin num="13" name="RC2/CCP1" type="BiDi"/>
+        <pin num="14" name="RC3/SKC/SCL" type="BiDi"/>
+        <pin num="15" name="RC4/SKI/SDA/D-" type="BiDi"/>
+        <pin num="16" name="RC5/SDO/D+" type="BiDi"/>
+        <pin num="17" name="RC6/TX/CK" type="BiDi"/>
+        <pin num="18" name="RC7/RX/DT" type="BiDi"/>
+        <pin num="19" name="VSS" type="power_in"/>
+        <pin num="20" name="VDD" type="power_in"/>
+        <pin num="21" name="RB0/INT" type="BiDi"/>
+        <pin num="22" name="RB1/INT1" type="BiDi"/>
+        <pin num="23" name="RB2/INT2" type="BiDi"/>
+        <pin num="24" name="RB3/PGM/CCP2" type="BiDi"/>
+        <pin num="25" name="RB4" type="BiDi"/>
+        <pin num="26" name="RB5" type="BiDi"/>
+        <pin num="27" name="RB6/PGC" type="BiDi"/>
+        <pin num="28" name="RB7/PGO" type="BiDi"/>
+      </pins>
+    </libpart>
+    <libpart lib="PIC soldering station-cache" part="PNP">
+      <fields>
+        <field name="Reference">Q</field>
+        <field name="Value">PNP</field>
+      </fields>
+      <pins>
+        <pin num="1" name="E" type="passive"/>
+        <pin num="2" name="B" type="input"/>
+        <pin num="3" name="C" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="device" part="POT">
+      <description>Potentionmetre</description>
+      <fields>
+        <field name="Reference">RV</field>
+        <field name="Value">POT</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+        <pin num="3" name="3" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="PIC soldering station-rescue" part="R-RESCUE-PIC_soldering_station">
+      <footprints>
+        <fp>R?</fp>
+        <fp>SM0603</fp>
+        <fp>SM0805</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">R-RESCUE-PIC_soldering_station</field>
+      </fields>
+      <pins>
+        <pin num="1" name="~" type="passive"/>
+        <pin num="2" name="~" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="device" part="SPST">
+      <description>Interrupteur simple</description>
+      <fields>
+        <field name="Reference">SW</field>
+        <field name="Value">SPST</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="input"/>
+        <pin num="2" name="2" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="PIC soldering station-cache" part="TMP101">
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">TMP101</field>
+      </fields>
+      <pins>
+        <pin num="1" name="SCL" type="BiDi"/>
+        <pin num="2" name="GND" type="passive"/>
+        <pin num="3" name="ALERT" type="output"/>
+        <pin num="4" name="V+" type="output"/>
+        <pin num="5" name="ADD0" type="output"/>
+        <pin num="6" name="SDA" type="output"/>
+      </pins>
+    </libpart>
+    <libpart lib="conn" part="XLR5">
+      <description>XLR 5 pins</description>
+      <fields>
+        <field name="Reference">K</field>
+        <field name="Value">XLR5</field>
+      </fields>
+      <pins>
+        <pin num="1" name="P1" type="passive"/>
+        <pin num="2" name="P3" type="passive"/>
+        <pin num="3" name="P2" type="passive"/>
+        <pin num="4" name="P3" type="passive"/>
+        <pin num="5" name="P5" type="passive"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries>
+    <library logical="PIC soldering station-rescue">
+      <uri>/media/wonbinbk/DATA/DATA on HP/WORKING/Soldering station/My station/PIC soldering station-rescue.lib</uri>
+    </library>
+    <library logical="conn">
+      <uri>/usr/share/kicad/library/conn.lib</uri>
+    </library>
+    <library logical="device">
+      <uri>/usr/share/kicad/library/device.lib</uri>
+    </library>
+    <library logical="regul">
+      <uri>/usr/share/kicad/library/regul.lib</uri>
+    </library>
+    <library logical="display">
+      <uri>/usr/share/kicad/library/display.lib</uri>
+    </library>
+    <library logical="PIC soldering station-cache">
+      <uri>/media/wonbinbk/DATA/DATA on HP/WORKING/Soldering station/My station/PIC soldering station-cache.lib</uri>
+    </library>
+  </libraries>
+  <nets>
+    <net code="1" name="+5V">
+      <node ref="R21" pin="1"/>
+      <node ref="R22" pin="1"/>
+      <node ref="C17" pin="2"/>
+      <node ref="RV2" pin="1"/>
+      <node ref="R7" pin="1"/>
+      <node ref="C12" pin="1"/>
+      <node ref="U3" pin="3"/>
+      <node ref="C20" pin="2"/>
+      <node ref="R5" pin="1"/>
+      <node ref="R11" pin="2"/>
+      <node ref="U4" pin="4"/>
+      <node ref="U4" pin="5"/>
+      <node ref="C2" pin="1"/>
+      <node ref="U1" pin="8"/>
+      <node ref="R8" pin="1"/>
+      <node ref="U5" pin="20"/>
+      <node ref="R1" pin="1"/>
+      <node ref="R27" pin="2"/>
+      <node ref="Q1" pin="3"/>
+    </net>
+    <net code="2" name="Net-(Q1-Pad1)">
+      <node ref="Q2" pin="1"/>
+      <node ref="Q1" pin="1"/>
+      <node ref="R12" pin="2"/>
+    </net>
+    <net code="3" name="Net-(Q3-PadG)">
+      <node ref="R12" pin="1"/>
+      <node ref="Q3" pin="G"/>
+    </net>
+    <net code="4" name="Net-(Q1-Pad2)">
+      <node ref="R9" pin="2"/>
+      <node ref="Q2" pin="2"/>
+      <node ref="R10" pin="1"/>
+      <node ref="Q1" pin="2"/>
+    </net>
+    <net code="5" name="/HEAT_CTRL">
+      <node ref="U5" pin="13"/>
+      <node ref="R9" pin="1"/>
+    </net>
+    <net code="6" name="Net-(R15-Pad1)">
+      <node ref="R15" pin="1"/>
+      <node ref="U5" pin="26"/>
+    </net>
+    <net code="7" name="/HOLSTER">
+      <node ref="R27" pin="1"/>
+      <node ref="K2" pin="4"/>
+      <node ref="U5" pin="21"/>
+    </net>
+    <net code="8" name="GND">
+      <node ref="D5" pin="2"/>
+      <node ref="D4" pin="2"/>
+      <node ref="D3" pin="2"/>
+      <node ref="K2" pin="2"/>
+      <node ref="R26" pin="2"/>
+      <node ref="C7" pin="2"/>
+      <node ref="U4" pin="2"/>
+      <node ref="R25" pin="2"/>
+      <node ref="C12" pin="2"/>
+      <node ref="C9" pin="2"/>
+      <node ref="C6" pin="2"/>
+      <node ref="C5" pin="2"/>
+      <node ref="U3" pin="2"/>
+      <node ref="U2" pin="2"/>
+      <node ref="C20" pin="1"/>
+      <node ref="J1" pin="2"/>
+      <node ref="C13" pin="2"/>
+      <node ref="C11" pin="2"/>
+      <node ref="C15" pin="1"/>
+      <node ref="C16" pin="1"/>
+      <node ref="RV2" pin="3"/>
+      <node ref="D2" pin="2"/>
+      <node ref="U5" pin="19"/>
+      <node ref="C4" pin="2"/>
+      <node ref="D1" pin="1"/>
+      <node ref="Q3" pin="S"/>
+      <node ref="C2" pin="2"/>
+      <node ref="U1" pin="4"/>
+      <node ref="U5" pin="8"/>
+      <node ref="C1" pin="2"/>
+      <node ref="RV1" pin="1"/>
+      <node ref="C3" pin="1"/>
+      <node ref="C18" pin="1"/>
+      <node ref="C19" pin="1"/>
+      <node ref="C10" pin="1"/>
+      <node ref="C17" pin="1"/>
+      <node ref="Q2" pin="3"/>
+      <node ref="C8" pin="2"/>
+    </net>
+    <net code="9" name="/DIGIT_4">
+      <node ref="AFF1" pin="12"/>
+      <node ref="U5" pin="16"/>
+    </net>
+    <net code="10" name="Net-(R22-Pad2)">
+      <node ref="SW3" pin="2"/>
+      <node ref="R22" pin="2"/>
+    </net>
+    <net code="11" name="Net-(R21-Pad2)">
+      <node ref="R21" pin="2"/>
+      <node ref="SW2" pin="1"/>
+    </net>
+    <net code="12" name="Net-(C13-Pad1)">
+      <node ref="C13" pin="1"/>
+      <node ref="U5" pin="12"/>
+      <node ref="X1" pin="2"/>
+    </net>
+    <net code="13" name="Net-(D1-Pad4)">
+      <node ref="D1" pin="4"/>
+      <node ref="P1" pin="1"/>
+    </net>
+    <net code="14" name="Net-(D1-Pad2)">
+      <node ref="D1" pin="2"/>
+      <node ref="P1" pin="2"/>
+    </net>
+    <net code="15" name="Net-(D2-Pad1)">
+      <node ref="D2" pin="1"/>
+      <node ref="R5" pin="2"/>
+    </net>
+    <net code="16" name="Net-(D5-Pad1)">
+      <node ref="R24" pin="2"/>
+      <node ref="D5" pin="1"/>
+    </net>
+    <net code="17" name="Net-(D4-Pad1)">
+      <node ref="R23" pin="2"/>
+      <node ref="D4" pin="1"/>
+    </net>
+    <net code="18" name="/DIGIT_3">
+      <node ref="U5" pin="4"/>
+      <node ref="AFF1" pin="9"/>
+    </net>
+    <net code="19" name="/D">
+      <node ref="AFF1" pin="2"/>
+      <node ref="R16" pin="2"/>
+    </net>
+    <net code="20" name="/G">
+      <node ref="AFF1" pin="5"/>
+      <node ref="R13" pin="2"/>
+    </net>
+    <net code="21" name="/B">
+      <node ref="R14" pin="2"/>
+      <node ref="AFF1" pin="7"/>
+    </net>
+    <net code="22" name="/C">
+      <node ref="R15" pin="2"/>
+      <node ref="AFF1" pin="4"/>
+    </net>
+    <net code="23" name="/E">
+      <node ref="AFF1" pin="1"/>
+      <node ref="R17" pin="2"/>
+    </net>
+    <net code="24" name="/F">
+      <node ref="R18" pin="2"/>
+      <node ref="AFF1" pin="10"/>
+    </net>
+    <net code="25" name="/A">
+      <node ref="R19" pin="2"/>
+      <node ref="AFF1" pin="11"/>
+    </net>
+    <net code="26" name="/DP">
+      <node ref="R20" pin="1"/>
+      <node ref="AFF1" pin="3"/>
+    </net>
+    <net code="27" name="Net-(R20-Pad2)">
+      <node ref="R20" pin="2"/>
+      <node ref="U5" pin="6"/>
+    </net>
+    <net code="28" name="/DIGIT_2">
+      <node ref="AFF1" pin="8"/>
+      <node ref="U5" pin="3"/>
+    </net>
+    <net code="29" name="/DIGIT_1">
+      <node ref="AFF1" pin="6"/>
+      <node ref="U5" pin="2"/>
+    </net>
+    <net code="30" name="/AN3">
+      <node ref="R6" pin="2"/>
+      <node ref="C10" pin="2"/>
+      <node ref="U5" pin="5"/>
+    </net>
+    <net code="31" name="Net-(RV1-Pad3)">
+      <node ref="RV1" pin="3"/>
+    </net>
+    <net code="32" name="Net-(C7-Pad1)">
+      <node ref="C9" pin="1"/>
+      <node ref="U3" pin="1"/>
+      <node ref="U2" pin="3"/>
+      <node ref="C7" pin="1"/>
+    </net>
+    <net code="33" name="+24V">
+      <node ref="C5" pin="1"/>
+      <node ref="D1" pin="3"/>
+      <node ref="C4" pin="1"/>
+      <node ref="K2" pin="1"/>
+      <node ref="U2" pin="1"/>
+      <node ref="J1" pin="1"/>
+    </net>
+    <net code="34" name="Net-(D3-Pad1)">
+      <node ref="D3" pin="1"/>
+      <node ref="R10" pin="2"/>
+    </net>
+    <net code="36" name="/TEMP_IN">
+      <node ref="C6" pin="1"/>
+      <node ref="U1" pin="7"/>
+      <node ref="R6" pin="1"/>
+      <node ref="U1" pin="6"/>
+    </net>
+    <net code="38" name="/SCL">
+      <node ref="U5" pin="14"/>
+      <node ref="R7" pin="2"/>
+      <node ref="U4" pin="1"/>
+    </net>
+    <net code="39" name="/TMP_A">
+      <node ref="U4" pin="3"/>
+    </net>
+    <net code="40" name="/SDA">
+      <node ref="U4" pin="6"/>
+      <node ref="U5" pin="15"/>
+      <node ref="R11" pin="1"/>
+    </net>
+    <net code="41" name="/HEATER">
+      <node ref="K2" pin="3"/>
+      <node ref="Q3" pin="D"/>
+    </net>
+    <net code="42" name="/UART-TX">
+      <node ref="C18" pin="2"/>
+      <node ref="U5" pin="17"/>
+      <node ref="SW3" pin="1"/>
+      <node ref="R26" pin="1"/>
+      <node ref="R24" pin="1"/>
+    </net>
+    <net code="43" name="/PGC">
+      <node ref="U5" pin="27"/>
+      <node ref="R14" pin="1"/>
+    </net>
+    <net code="44" name="/UART-RX">
+      <node ref="R23" pin="1"/>
+      <node ref="R25" pin="1"/>
+      <node ref="SW2" pin="2"/>
+      <node ref="U5" pin="18"/>
+      <node ref="C19" pin="2"/>
+    </net>
+    <net code="45" name="/PGD">
+      <node ref="U5" pin="28"/>
+      <node ref="R13" pin="1"/>
+    </net>
+    <net code="46" name="Net-(R17-Pad1)">
+      <node ref="U5" pin="24"/>
+      <node ref="R17" pin="1"/>
+    </net>
+    <net code="47" name="/MCLR">
+      <node ref="R8" pin="2"/>
+      <node ref="U5" pin="1"/>
+    </net>
+    <net code="48" name="Net-(R19-Pad1)">
+      <node ref="U5" pin="22"/>
+      <node ref="R19" pin="1"/>
+    </net>
+    <net code="49" name="Net-(R18-Pad1)">
+      <node ref="R18" pin="1"/>
+      <node ref="U5" pin="23"/>
+    </net>
+    <net code="50" name="Net-(R2-Pad2)">
+      <node ref="U1" pin="3"/>
+      <node ref="R2" pin="2"/>
+    </net>
+    <net code="51" name="Net-(R3-Pad2)">
+      <node ref="U1" pin="2"/>
+      <node ref="R3" pin="2"/>
+      <node ref="R4" pin="1"/>
+    </net>
+    <net code="52" name="Net-(R3-Pad1)">
+      <node ref="RV1" pin="2"/>
+      <node ref="R3" pin="1"/>
+    </net>
+    <net code="53" name="Net-(C3-Pad2)">
+      <node ref="U1" pin="1"/>
+      <node ref="C3" pin="2"/>
+      <node ref="R4" pin="2"/>
+      <node ref="U1" pin="5"/>
+    </net>
+    <net code="54" name="/SENSOR">
+      <node ref="R1" pin="2"/>
+      <node ref="R2" pin="1"/>
+      <node ref="C1" pin="1"/>
+      <node ref="K2" pin="5"/>
+    </net>
+    <net code="55" name="/OSC1">
+      <node ref="U5" pin="9"/>
+      <node ref="C15" pin="2"/>
+      <node ref="X2" pin="2"/>
+    </net>
+    <net code="56" name="/OSC2">
+      <node ref="X2" pin="1"/>
+      <node ref="C16" pin="2"/>
+      <node ref="U5" pin="10"/>
+    </net>
+    <net code="57" name="Net-(C11-Pad1)">
+      <node ref="X1" pin="1"/>
+      <node ref="C11" pin="1"/>
+      <node ref="U5" pin="11"/>
+    </net>
+    <net code="58" name="Net-(R16-Pad1)">
+      <node ref="U5" pin="25"/>
+      <node ref="R16" pin="1"/>
+    </net>
+    <net code="59" name="/TEMP_ADJ">
+      <node ref="U5" pin="7"/>
+      <node ref="C8" pin="1"/>
+      <node ref="RV2" pin="2"/>
+    </net>
+  </nets>
+</export>
