@@ -1,6 +1,6 @@
 /*
 	Version:2
-	Date: 9 April 2016
+	Date: 21 April 2016
 */
 #include <xc.h>
 #include <stdio.h>
@@ -8,11 +8,6 @@
 #include <conio.h>
 #define _XTAL_FREQ 20000000	//for _delay_ms()
 #define _BAUD 115200
-/*
-	Gain adjusted so 	@100°C ADC=276
-				@27°C ADC=225
-*/
-#define kTemp 143		//Current_T= kTemp * (ADC-206) /100
 /*
 	Common Anode 7SEGMENT leds
 	RB7 - G			RA0 - DIGIT 1	
