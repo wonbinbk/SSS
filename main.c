@@ -20,7 +20,7 @@
 	RA4 - DP
 	RB0 - Interrupt on change for Holster detection
 	
-The semicolon ":" only display when RA2=1 & RA4=0
+The semicolon ":" only display when RA4=0
 	
 		  a
 	    	---
@@ -57,6 +57,14 @@ unsigned char led7[15]=	{
 				0b111000,	//deg
 				0b1101110,      //equal
 			};
+unsigned char sen_err,heat_err;
+unsigned char display_scan,op_mod;
+void init();
+void putch(char c);
+void pwm_update(unsigned int duty_cycle);
+void print7(unsigned int num, unsigned char display);
+unsigned int read_adc(unsigned char channel);
+void heat_control(unsigned int temperature);
 #define E 11
 #define H 12
 #define dash 10
@@ -67,13 +75,9 @@ unsigned char led7[15]=	{
 #define temp_in 3
 #define tar_changed 1
 #define tar_unchanged 0
-unsigned char sen_err,heat_err;
-unsigned char display_scan;
-void init();
-void putch(char c);
-void pwm_update(unsigned int duty_cycle);
-void print7(unsigned int num, unsigned char display);
-unsigned int read_adc(unsigned char channel);
+#define clock 2
+#define standby 1
+#define active 0
 //Interrupt service routine			
 void __interrupt myisr(void)
 	{
@@ -85,7 +89,7 @@ void __interrupt myisr(void)
 			PORTB=led7[d[l]];
 			if(l<3)
 			{
-				PORTA=1<<l;
+				PORTA=1<<l | (!op_mod<<4);
 				__delay_us(10);
 				RC5=0;
 			}
@@ -93,11 +97,29 @@ void __interrupt myisr(void)
 			{
 				RC5=1;
 				__delay_us(10);
-				PORTA=0x10;
+				PORTA=!op_mod<<4;
 			}	
 			l++;
 			if (l==4) l=0;	
 			if(display_scan!=0) display_scan-=1;
+		}
+		if(TMR1IE && TMR1IF)
+		{
+			TMR1IF=0;
+			second++;
+			if(second==60)
+			{
+				second=0;
+				minute++;
+				if(minute==60)
+				{
+					minute=0;
+					hour++;
+					if(hour==24) hour=0;
+				}
+			}
+			TMR1H=0x80;
+			TMR1L=0x00;		
 		}
 	}
 		
@@ -110,34 +132,49 @@ void main (void)
 		PORTA=0x10;
 		TRISCbits.TRISC7=1;
 		TRISCbits.TRISC6=1;
+		hour=0;
+		minute=51;
 		while(1)
-		{
+		{	
 			for(i=0;i<8;i++)
 			{
 				tar=tar+read_adc(temp_adj);
 			}
-			tar=150+(tar>>7)*5;
+			tar=150+(tar>>7)*5;	//Convert target to Deg C
 			if (tar!=pre_tar)	//Only display if changed
 			{	
-				display_scan=200;
-				pre_tar=tar;
-			}			
-			for(i=0;i<8;i++)
+				display_scan=200;	//to display target 200 times. (pause)
+				pre_tar=tar;		
+			}	
+			op_mod=!RB0;	
+			if(op_mod)
 			{
-				T=T+read_adc(temp_in);
+				if(tar>200)	heat_control(200);
+				else 		heat_control(tar);//decrease temp to 200 degC
+				print7(hour*100+minute,clock);//and display a clock	
+			
 			}
-			T=(((T>>3)-187)*100)>>6;//Convert T to degree Celsius
-			if(display_scan!=0) print7(tar,tar_changed);
-			else print7(T, tar_unchanged);
-			if(tar>T) pwm_update(1023);
-			else pwm_update(0);
-			__delay_ms(100);
+			else
+			{
+				heat_control(tar);
+				if(display_scan>0) 	print7(tar,tar_changed);
+				else 			print7(T,tar_unchanged);	
+			}
 			tar=0;
 			T=0;
+			__delay_ms(100);
 		}		
 	}
-
-
+void heat_control(unsigned int temperature)
+{
+	for(i=0;i<8;i++)
+	{
+		T=T+read_adc(temp_in);
+	}
+	T=(((T>>3)-187)*100)>>6;//Convert T to degree Celsius
+	if(temperature>T)	pwm_update(1023);
+	else 			pwm_update(0);
+}
 
 /**********************INIT PORT AND MODULES*******************************************************************************/	
 void init(void)
@@ -188,12 +225,14 @@ void init(void)
 		TMR1CS = 1;		//Use external clock
 		T1SYNC = 1;		//Do not syncronize with internal clock, to use in Sleep mode
 		TMR1H=0x80;		
-		TMR1ON = 0;		//Enable Timer 1
-		TMR1IE = 0;		//enable Timer 1 interrupt
+		TMR1ON = 1;		//Enable Timer 1
+		TMR1IE = 1;		//enable Timer 1 interrupt
 	//Interrupt
 		GIE=1;
 		PEIE=1;
 		ADIE=0;
+		INTEDG=0;
+		INTE=0;
 	}
 
 
@@ -229,25 +268,28 @@ void pwm_update(unsigned int duty_cycle)
 ***************************************************************************************************************************/
 void print7(unsigned int num,unsigned char display)
 	{
-		if(display==tar_unchanged)
+		result=div(num,100);
+		d[2]=result.quot;
+		num=result.rem;
+		result=div(num,10);
+		d[1]=result.quot;
+		d[0]=result.rem;
+		switch (display)
 		{
-			result=div(num,100);
-			d[3]=result.quot;
-			num=result.rem;
-			result=div(num,10);
-			d[2]=result.quot;
-			d[1]=result.rem;
-			d[0]=deg;
-		}
-		else
-		{
-			result=div(num,100);
-			d[2]=result.quot;
-			num=result.rem;
-			result=div(num,10);
-			d[1]=result.quot;
-			d[0]=result.rem;
-			d[3]=equal;
+			case tar_unchanged:	//target unchanged, display current temp
+				d[3]=d[2];
+				d[2]=d[1];
+				d[1]=d[0];
+				d[0]=deg;
+				break;
+			case tar_changed:	//target changed, display new target
+				d[3]=equal;	
+				break;
+			case clock:		//in standby mode, display clock
+				result=div(d[2],10);
+				d[3]=result.quot;
+				d[2]=result.rem;
+				break;
 		}
 	}
 
@@ -263,7 +305,7 @@ unsigned int read_adc(unsigned char channel)
 		__delay_us(30);
 		GO_DONE=1;
 		while(GO_DONE) continue;
-		v=(ADRESH<<8) + ADRESL;
+		v=(ADRESH<<8) | ADRESL;
 		GIE=1;
 		return v;
 	}
