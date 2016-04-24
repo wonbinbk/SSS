@@ -55,7 +55,7 @@ unsigned char led7[15]=	{
 				0b1100000,	//E
 				0b10010,	//H
 				0b111000,	//deg
-				0b1101110,      //equal
+				0b1101110,  //equal
 			};
 unsigned char sen_err,heat_err;
 unsigned char display_scan,op_mod;
@@ -78,6 +78,8 @@ void heat_control(unsigned int temperature);
 #define clock 2
 #define standby 1
 #define active 0
+#define hr 0
+#define mn 1
 //Interrupt service routine			
 void __interrupt myisr(void)
 	{
@@ -89,7 +91,7 @@ void __interrupt myisr(void)
 			PORTB=led7[d[l]];
 			if(l<3)
 			{
-				PORTA=1<<l | (!op_mod<<4);
+				PORTA=1<<l | (((!op_mod) | (second & 0x01))<<4);
 				__delay_us(10);
 				RC5=0;
 			}
@@ -97,7 +99,7 @@ void __interrupt myisr(void)
 			{
 				RC5=1;
 				__delay_us(10);
-				PORTA=!op_mod<<4;
+				PORTA=((!op_mod) | (second & 0x01))<<4;
 			}	
 			l++;
 			if (l==4) l=0;	
@@ -133,14 +135,14 @@ void main (void)
 		TRISCbits.TRISC7=1;
 		TRISCbits.TRISC6=1;
 		hour=0;
-		minute=51;
+		minute=0;
 		while(1)
 		{	
 			for(i=0;i<8;i++)
 			{
 				tar=tar+read_adc(temp_adj);
 			}
-			tar=150+(tar>>7)*5;	//Convert target to Deg C
+			tar=30+(tar>>7)*5;	//Convert target to Deg C
 			if (tar!=pre_tar)	//Only display if changed
 			{	
 				display_scan=200;	//to display target 200 times. (pause)
@@ -162,9 +164,26 @@ void main (void)
 			}
 			tar=0;
 			T=0;
-			__delay_ms(100);
+			while(RC7)	//Adjust hour
+			{
+			 	hour++;
+			 	if(hour==25) hour=0;
+			 	pwm_update(0);
+			 	print7(hour*100+minute,clock);
+			 	__delay_ms(500);
+			}
+			while(RC6)	//Adjust minute
+			{
+				minute++;
+				if(minute==61) minute=0;
+				pwm_update(0);
+				print7(hour*100+minute,clock);
+				__delay_ms(500);
+			}
+			__delay_ms(70);
 		}		
-	}
+	}	
+
 void heat_control(unsigned int temperature)
 {
 	for(i=0;i<8;i++)
