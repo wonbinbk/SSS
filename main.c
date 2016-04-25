@@ -142,7 +142,7 @@ void main (void)
 			{
 				tar=tar+read_adc(temp_adj);
 			}
-			tar=30+(tar>>7)*5;	//Convert target to Deg C
+			tar=(tar>>7)*5;	//Convert target to Deg C
 			if (tar!=pre_tar)	//Only display if changed
 			{	
 				display_scan=200;	//to display target 200 times. (pause)
