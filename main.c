@@ -4,9 +4,10 @@
 **	and PIC16F87XA.
 **	Git: www.github.com/wonbinbk
 **	Version:3
-**	Date: 30 Jun 2016
+**	Date: July 19 2016
 **	Todo list:
-**		-PID control of heater (maybe overkill?)
+**		-PID control of heater (if necessary(?) Right now it's doing fine
+**		without PID)
 **		-Allow to adjust PID coefficients while running
 **		-Set a timeout when iron rest (display clock) and
 **			turn off or set iron to standby mode after 
@@ -46,9 +47,9 @@
 #pragma config LVP=OFF, CPD=OFF, WRT=OFF, FOSC=HS
 
 /* Variable declare */
-float Temp;
-unsigned int v,duty;
-unsigned int tar,pre_tar,T,pre_T,e,pre_e;
+unsigned int Kp;//, Ki, Kd;
+unsigned int tar,pre_tar,T;//,pre_T;
+int e;//,pre_e,sum_e;
 div_t result;
 unsigned char d[4],led[4],l,i;	
 unsigned char hour, minute, second;
@@ -69,14 +70,14 @@ unsigned char led7[15]=	{
 				0b111000,	//deg
 				0b1101110,  //equal
 			};
-unsigned char sen_err,heat_err;
 unsigned char display_scan,op_mod;
+
 void init();
 void putch(unsigned char c);
 void pwm_update(unsigned int duty_cycle);
 void print7(unsigned int num, unsigned char display);
 unsigned int read_adc(unsigned char channel);
-void heat_control(unsigned int temperature);
+void heat_control(unsigned int set_T);
 #define E 11
 #define H 12
 #define dash 10
@@ -92,7 +93,7 @@ void heat_control(unsigned int temperature);
 #define active 0
 #define hr 0
 #define mn 1
-#define display_error 5
+#define display_error 3
 
 /*	Interrupt service routine			*/
 void __interrupt myisr(void)
@@ -136,17 +137,7 @@ void __interrupt myisr(void)
 			TMR1L=0x00;		
 		}
 	}
-/***************************************************************************************************************************
-	This function required by printf()
-***************************************************************************************************************************/
 
-void putch(unsigned char c)
-	{
-		while(!TXIF)
-			continue;
-		TXREG = c;
-	}
-		
 void main (void)
 	{
 		init();
@@ -154,6 +145,12 @@ void main (void)
 		PORTB=0xFF;
 		RC5=0;
 		PORTA=0x10;
+		/*printf("# SSS - Smart Soldering Station\n");
+		printf("# Version - 3\n");
+		printf("# Author: Thai Phan - thaiphd@gmail.com\n");
+		printf("# Project page: www.github.com/wonbinbk\n");*/
+		Kp=300;
+		//Ki=Kd=0;
 		while(1)
 		{	
 			for(i=0;i<8;i++)
@@ -167,7 +164,7 @@ void main (void)
 				pre_tar=tar;		
 			}	
 			heat_control(tar);
-			op_mod=!RB0;	
+			op_mod=!RB0;
 			if(op_mod)
 				print7(hour*100+minute,clock);//and display a clock
 			else
@@ -175,7 +172,7 @@ void main (void)
 				if(display_scan>0) 	print7(tar,tar_changed);
 				else 			print7(T,tar_unchanged);	
 			}
-			/*while(RC7)	//Adjust hour
+			while(RC7)	//Adjust hour
 			{
 			 	hour++;
 			 	if(hour==25) hour=0;
@@ -189,22 +186,44 @@ void main (void)
 				if(minute==60) minute=0;
 				pwm_update(0);
 				print7(hour*100+minute,clock);
-				__decat lay_ms(200);
+				__delay_ms(200);
 			}
-			*/
+			
 		}		
 	}	
 
-void heat_control(unsigned int temperature)
+void heat_control(unsigned int set_T)
 {
-	unsigned int duty_cycle = 0;
+/* In case you need to use PID, uncomment this block*/
+
+	long duty = 0;
 	for(i=0;i<8;i++)
 	{
 		T=T+read_adc(temp_in);
 	}
 	T=(((T>>3)-160)*100)>>6;//Convert T to degree Celsius
-	if(temperature>T)	pwm_update(1023);
-	else 			pwm_update(0);
+	if (set_T>T)	//Since I only use Kp here, if e<=0 don't bother calculating
+	{
+		e= set_T - T;
+		//sum_e= sum_e + e;
+		duty = (long)Kp*e ;//+ (long)Ki*sum_e + (long)Kd*(e-pre_e);
+		//pre_e= e;
+		if (duty>1023) pwm_update(1023);
+		else pwm_update((unsigned int)duty);
+	}
+	else pwm_update(0);
+	//printf("%d,%d,%ld\n",T,set_T,duty);
+
+/*
+	for(i=0;i<8;i++)
+	{
+		T=T+read_adc(temp_in);
+	}
+	T=(((T>>3)-160)*100)>>6;//Convert T to degree Celsius
+	if (T<set_T) pwm_update(1023);
+	else pwm_update(0);
+	printf("%d,%d\n",T,set_T);
+*/
 }
 
 /***************************************************************************************************************************
@@ -263,6 +282,7 @@ void pwm_update(unsigned int duty_cycle)
 ***************************************************************************************************************************/
 unsigned int read_adc(unsigned char channel)
 	{
+		unsigned int v=0;
 		GIE=0;
 		ADCON0bits.CHS = channel;
 		__delay_us(20);
@@ -282,9 +302,8 @@ void init(void)
 		TRISA = 0x28;	//RA3 & RA5 input RA0,1,2,4 output.
 		TRISB = 0x01;	//RB0 input, the rest output.
 		TRISC = 0xC3; 	//RC7,6 buttons input, RC5 output, RC4,3 I2C, RC2 output HEAT_CTRL, RC1,0 input for realtime osc.
-		//TRISC = 0x03;	//To enable pin C7, C6 as USART
 	//USART for debugging purpose
-	
+	/*
 		SYNC = 0;		//Synchronous transmit=1, asynch=0
 		BRGH = 1;		//for asynch, 1=high speed, 0=low speed
 		TX9 = 0;		//9 bit mode = 1, 8 bit mode=0
@@ -295,7 +314,7 @@ void init(void)
 		OERR = 0;		//Overun error enable=1, disable=0
 		SPBRG = _XTAL_FREQ/(16*_BAUD) - 1;		//~36, 0.55% error
 		TXEN = 1;		//Transmit enable =1, disable=0
-	
+	*/
 	//ADC
 		ADCON0bits.ADCS = 0b10;	 	//Tad = 64 Tosc= 3.2us
 						//Acquisition time =20us, conversion time = 12*Tad=38.4us
@@ -336,5 +355,15 @@ void init(void)
 		INTE=0;
 	}
 
+/***************************************************************************************************************************
+	This function required by printf()
+***************************************************************************************************************************/
 
+void putch(unsigned char c)
+	{
+		while(!TXIF)
+			continue;
+		TXREG = c;
+	}
+		
 /**************************************************************************************************************************/
