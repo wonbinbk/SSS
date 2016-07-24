@@ -43,7 +43,7 @@
 **	    	----		
 **	    	 d
 */
-#pragma config WDTE=OFF, PWRTE=OFF, CP=OFF, BOREN=OFF, DEBUG=OFF
+#pragma config WDTE=OFF, PWRTE=OFF, CP=OFF, BOREN=ON, DEBUG=OFF
 #pragma config LVP=OFF, CPD=OFF, WRT=OFF, FOSC=HS
 
 /* Variable declare */
@@ -70,14 +70,17 @@ unsigned char led7[15]=	{
 				0b111000,	//deg
 				0b1101110,  //equal
 			};
-unsigned char display_scan,op_mod;
-
+unsigned char display_scan,op_mod,iron_resting, calib_mod, time_out;
+__eeprom unsigned char rom_adc0, rom_adc100;	//t=100*[(ADC-adc0) / (adc100-adc0)] 
+unsigned int adc0, adc100;
 void init();
 void putch(unsigned char c);
 void pwm_update(unsigned int duty_cycle);
 void print7(unsigned int num, unsigned char display);
 unsigned int read_adc(unsigned char channel);
+unsigned int read_raw_adc(unsigned char channel);
 void heat_control(unsigned int set_T);
+void calibration();
 #define E 11
 #define H 12
 #define dash 10
@@ -86,14 +89,19 @@ void heat_control(unsigned int set_T);
 #define equal 14
 #define temp_adj 4
 #define temp_in 3
-#define tar_changed 1
 #define tar_unchanged 0
+#define tar_changed 1
 #define clock 2
-#define standby 1
-#define active 0
+#define calib 3
+#define four_dash 4	//While calibrating.
 #define hr 0
 #define mn 1
-#define display_error 3
+#define display_error 4
+#define time_to_standby 20 	//in minute
+#define time_to_turnoff 30	//in minute
+#define normal 0
+#define standby 1
+#define turnoff 2
 
 /*	Interrupt service routine			*/
 void __interrupt myisr(void)
@@ -106,7 +114,7 @@ void __interrupt myisr(void)
 			PORTB=led7[d[l]];
 			if(l<3)
 			{
-				PORTA=1<<l | (((!op_mod) | (second & 0x01))<<4);
+				PORTA=1<<l | (((!iron_resting) | (second & 0x01))<<4);
 				RC5=0;
 			}
 			else 
@@ -126,6 +134,7 @@ void __interrupt myisr(void)
 			{
 				second=0;
 				minute++;
+				time_out++;
 				if(minute==60)
 				{
 					minute=0;
@@ -141,46 +150,68 @@ void __interrupt myisr(void)
 void main (void)
 	{
 		init();
+		/****** Check if it reset*/
+		print7(8888, calib);
+		__delay_ms(500);
+		/*************************/
+		if(RC6 || RC7) calibration(); //After power on if SW? pressed then go to calibration mode.
 		pwm_update(0);
 		PORTB=0xFF;
 		RC5=0;
 		PORTA=0x10;
-		/*printf("# SSS - Smart Soldering Station\n");
-		printf("# Version - 3\n");
-		printf("# Author: Thai Phan - thaiphd@gmail.com\n");
-		printf("# Project page: www.github.com/wonbinbk\n");*/
 		Kp=300;
 		//Ki=Kd=0;
+		adc0= rom_adc0;
+		adc100= rom_adc100;
+		adc100= adc100 - adc0;
 		while(1)
 		{	
-			for(i=0;i<8;i++)
-			{
-				tar=tar+read_adc(temp_adj);
-			}
-			tar=(tar>>6)*5;	//Convert target to Deg C
+			tar=read_adc(temp_adj);
+			tar=(tar>>3)*5;	//Convert target to Deg C
 			if (tar!=pre_tar)	//Only display if changed
 			{	
 				display_scan=100;	//to display target 100 times. (pause)
 				pre_tar=tar;		
-			}	
-			heat_control(tar);
-			op_mod=!RB0;
-			if(op_mod)
+			}
+			iron_resting=!RB0;//RB0=0 means iron resting on holder
+			if(iron_resting)
+			{
 				print7(hour*100+minute,clock);//and display a clock
+				if(time_to_standby<time_out && time_out<time_to_turnoff) op_mod= standby;
+				else if(time_out>=time_to_turnoff) op_mod= turnoff;
+				else op_mod= normal;
+			}
 			else
 			{
 				if(display_scan>0) 	print7(tar,tar_changed);
 				else 			print7(T,tar_unchanged);	
+				time_out=0;		//Reset time out
+				op_mod= normal;
 			}
-			while(RC7)	//Adjust hour
+			switch(op_mod)
+			{
+				case standby:
+					if(tar>200)
+						heat_control(200);
+					else
+				case normal:
+					heat_control(tar);
+					break;
+				case turnoff:
+					heat_control(0);
+					break;
+				default:
+					break;
+			}
+			while(RC7 && !RC6 && !RB0)	//Adjust hour
 			{
 			 	hour++;
-			 	if(hour==25) hour=0;
+			 	if(hour==24) hour=0;
 			 	pwm_update(0);
 			 	print7(hour*100+minute,clock);
 			 	__delay_ms(200);
 			}
-			while(RC6)	//Adjust minute
+			while(RC6 && !RC7 && !RB0)	//Adjust minute
 			{
 				minute++;
 				if(minute==60) minute=0;
@@ -188,20 +219,20 @@ void main (void)
 				print7(hour*100+minute,clock);
 				__delay_ms(200);
 			}
-			
 		}		
 	}	
 
 void heat_control(unsigned int set_T)
 {
-/* In case you need to use PID, uncomment this block*/
-
+/***********************************************
+** value after calibrating
+** for reference, yours iron would be different
+** at 0 	degree ADC read 166
+** at 100 	degree ADC read 217
+***********************************************/
 	long duty = 0;
-	for(i=0;i<8;i++)
-	{
-		T=T+read_adc(temp_in);
-	}
-	T=(((T>>3)-160)*100)>>6;//Convert T to degree Celsius
+	T=read_adc(temp_in);
+	T=(unsigned int)((T-adc0)*(100f/(float)adc100));//Convert T to degree Celsius
 	if (set_T>T)	//Since I only use Kp here, if e<=0 don't bother calculating
 	{
 		e= set_T - T;
@@ -212,18 +243,6 @@ void heat_control(unsigned int set_T)
 		else pwm_update((unsigned int)duty);
 	}
 	else pwm_update(0);
-	//printf("%d,%d,%ld\n",T,set_T,duty);
-
-/*
-	for(i=0;i<8;i++)
-	{
-		T=T+read_adc(temp_in);
-	}
-	T=(((T>>3)-160)*100)>>6;//Convert T to degree Celsius
-	if (T<set_T) pwm_update(1023);
-	else pwm_update(0);
-	printf("%d,%d\n",T,set_T);
-*/
 }
 
 /***************************************************************************************************************************
@@ -258,6 +277,16 @@ void print7(unsigned int num,unsigned char display)
 				d[3]=result.quot;
 				d[2]=result.rem;
 				break;
+			case calib:
+				result=div(d[2],10);
+				d[3]=result.quot;
+				d[2]=result.rem;
+				break;
+			case four_dash:
+				d[3]=d[2]=d[1]=d[0]=dash;
+				break;
+			default:
+				break;
 		}
 		TMR0IE=1;
 	}
@@ -275,12 +304,22 @@ void pwm_update(unsigned int duty_cycle)
 		CCP1Y = duty_cycle && 0x01;
 	}
 
+unsigned int read_adc(unsigned char channel)
+{
+	unsigned int result_adc=0;
+	for(i=0; i<8; i++)
+	{
+		result_adc+=read_raw_adc(channel);
+	}
+	result_adc= result_adc>>3;
+	return result_adc;
+}
 
 /***************************************************************************************************************************
 	This function queue channel for ADC
 	trigger convertion, wait for ISR to return ADC value v.
 ***************************************************************************************************************************/
-unsigned int read_adc(unsigned char channel)
+unsigned int read_raw_adc(unsigned char channel)
 	{
 		unsigned int v=0;
 		GIE=0;
@@ -292,8 +331,36 @@ unsigned int read_adc(unsigned char channel)
 		GIE=1;
 		return v;
 	}
-
-
+void calibration()
+{
+	unsigned char calibrating=1;
+	while(RC6 || RC7);	//wait for buttons to be released
+	while(calibrating)
+	{
+		print7(0,four_dash);
+		__delay_ms(500);
+		if(RC6)
+		{
+			print7(0, tar_unchanged);
+			__delay_ms(500);
+			adc0= read_adc(temp_in);
+			rom_adc0= adc0;
+			print7(adc0, calib);
+			__delay_ms(1000);
+			while(RC6);
+		}
+		if(RC7)
+		{
+			print7(100, tar_unchanged);
+			__delay_ms(500);
+			adc100= read_adc(temp_in);
+			rom_adc100= adc100;
+			print7(adc100, calib);
+			__delay_ms(1000);
+			while(RC7);
+		}	
+	}
+}
 
 /**********************INIT PORT AND MODULES*******************************************************************************/	
 void init(void)
