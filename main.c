@@ -71,7 +71,7 @@ unsigned char led7[15]=	{
 				0b1101110,  //equal
 			};
 unsigned char display_scan,op_mod,iron_resting, calib_mod, time_out;
-__eeprom unsigned char rom_adc0, rom_adc100;	//t=100*[(ADC-adc0) / (adc100-adc0)] 
+__eeprom unsigned char rom_adc0=166, rom_adc100=216;	//t=100*[(ADC-adc0) / (adc100-adc0)] 
 unsigned int adc0, adc100;
 void init();
 void putch(unsigned char c);
